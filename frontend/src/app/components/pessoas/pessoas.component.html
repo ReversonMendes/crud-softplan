@@ -1,0 +1,82 @@
+<div class="container">
+<div class="col-md-6 offset-md-3">
+  <h2 class="text-center">Cadastro de Pessoa</h2>
+  <form [formGroup]="formulario">
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+
+      <input placeholder="Nome" name="nome" class="form-control" id="nome" formControlName="nome">
+
+      <div *ngIf="formulario.controls['nome'].errors && formulario.controls['nome'].touched" class="alert alert-danger">
+        O Nome é Obrigatório!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email:</label>
+
+      <input type="email" placeholder="Email" name="email" class="form-control" id="email" formControlName="email" >
+
+      <div *ngIf="formulario.controls['email'].errors && formulario.controls['email'].touched" class="alert alert-danger">
+        O Email Inválido!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">CPF:</label>
+
+      <input type="text" placeholder="CPF" name="cpf" class="form-control" id="cpf" formControlName="cpf" maxlength="14" mask="000.000.000-00" (change)="validadeMask('cpf')">
+
+      <div *ngIf="formulario.controls['cpf'].errors && formulario.controls['cpf'].touched && formulario.controls['cpf'].errors.cpfInvalido" class="alert alert-danger">
+        O CPF está Inválido!
+      </div>
+
+      <div *ngIf="formulario.controls['cpf'].errors && formulario.controls['cpf'].touched && formulario.controls['cpf'].hasError('required')" class="alert alert-danger">
+        O CPF é Obrigatório
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <label for="dataNascimento">Data de Nascimento:</label>
+
+      <input type="date" name="dtNascimento" class="form-control" id="dtnascimento" formControlName="dtNascimento" >
+
+      <div *ngIf="formulario.controls['dtNascimento'].errors && formulario.controls['dtNascimento'].touched && formulario.controls['dtNascimento'].errors.dataInvalida" class="alert alert-danger">
+        A data de Nascimento está inválida!
+      </div>
+
+      <div *ngIf="formulario.controls['dtNascimento'].errors && formulario.controls['dtNascimento'].touched && formulario.controls['dtNascimento'].hasError('required')" class="alert alert-danger">
+        A data de Nascimento é Obrigatório!
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="sexo">Sexo: </label>
+
+      <label for="sexo" class="radio-inline">
+        <input type="radio" formControlName="sexo"  name="sexo" value="M" id="sexo"> Masculino
+      </label>
+
+      <label for="sexo" class="radio-inline">
+        <input type="radio" formControlName="sexo"name="sexo" value="F" id="sexo"> Feminino
+      </label>
+
+      <div *ngIf="formulario.controls['sexo'].errors && formulario.controls['sexo'].touched" class="alert alert-danger">
+        Informe o seu Sexo!
+      </div>
+    </div>
+    <div class="form-group">
+      <input placeholder="Naturalidade" name="naturalidade" class="form-control" id="naturalidade" formControlName="naturalidade">
+    </div>
+    <div class="form-group">
+      <input placeholder="Nacionalidade" name="nacionalidade" class="form-control" id="nacionalidade" formControlName="nacionalidade">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-success" (click)="save()" [disabled]="!formulario.valid">Gravar</button>
+      <a routerLink="/pessoas" class="btn btn-danger">Cancelar</a>
+    </div>
+  </form>
+</div>
+</div>

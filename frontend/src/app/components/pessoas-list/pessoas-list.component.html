@@ -1,0 +1,53 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Exclusão</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>Deseja realmente exlcuir esse registro?</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="c('n')">Não</button>
+      <button type="button" class="btn btn-success" (click)="c('s')">Sim</button>
+  </div>
+</ng-template>
+
+<div class="container">
+  <div class="col-md-18 container ">
+    <h2>Cadastro de Pessoas</h2>
+    <a (click)="new()" class="btn btn-success">Novo</a>
+    <table class="table table-striped">
+
+      <thead>
+        <tr>
+          <th class="hidden">Id</th>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>CPF</th>
+          <th>Data Nascimento</th>
+          <th>Sexo</th>
+          <th>Naturalidade</th>
+          <th>Nacionalidade</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pessoa of pessoas">
+          <td class="hidden">{{pessoa.id}}</td>
+          <td>{{pessoa.nome}}</td>
+          <td>{{pessoa.email}}</td>
+          <td>{{pessoa.cpf  | cpf}}</td>
+          <td>{{pessoa.dtNascimento | date: 'dd/MM/yyyy'}}</td>
+          <td>{{pessoa.sexo}}</td>
+          <td>{{pessoa.naturalidade}}</td>
+          <td>{{pessoa.nacionalidade}}</td>
+          <td><button class="btn btn-danger" (click)="mensagem(content,pessoa)"> Excluir</button></td>
+          <td><a (click)="edit(pessoa)" class="btn btn-primary">Editar</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
